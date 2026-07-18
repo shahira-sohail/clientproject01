@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Independent Bookstore Events Page</title>
+  <meta name="description" content="Staff dashboard for managing and browsing independent bookstore events.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Floor Staff Dashboard</p>
+      <h1 class="site-title">Independent Bookstore Events</h1>
+      <p class="site-subtitle">Look up what's on the calendar, or add a new event to the shelf.</p>
+    </div>
+  </header>
+
+  <main class="page" id="main-content">
+
+    <section class="toolbar" aria-label="Search and filter events">
+      <form class="search-form" role="search" id="search-form" novalidate>
+        <div class="field">
+          <label for="search-input">Search events</label>
+          <input
+            type="text"
+            id="search-input"
+            name="search"
+            placeholder="Search by title or description"
+            autocomplete="off"
+            aria-describedby="search-hint">
+          <span id="search-hint" class="visually-hidden">Results update as you type</span>
+        </div>
+
+        <div class="field">
+          <label for="category-filter">Category</label>
+          <select id="category-filter" name="category">
+            <option value="all">All categories</option>
+            <option value="reading">Author Reading</option>
+            <option value="book-club">Book Club</option>
+            <option value="signing">Book Signing</option>
+            <option value="kids">Kids &amp; Family</option>
+            <option value="workshop">Workshop</option>
+          </select>
+        </div>
+      </form>
+
+      <button
+        type="button"
+        id="toggle-add-event"
+        class="btn btn-primary"
+        aria-expanded="false"
+        aria-controls="add-event-panel">
+        + Add Event
+      </button>
+    </section>
+
+    <section id="add-event-panel" class="add-event-panel" hidden aria-labelledby="add-event-heading">
+      <h2 id="add-event-heading">Add a new event</h2>
+
+      <form id="event-form" novalidate>
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="event-title">Event title <span class="required" aria-hidden="true">*</span></label>
+            <input type="text" id="event-title" name="title" required aria-required="true">
+            <span class="error-text" id="event-title-error" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="event-category">Category <span class="required" aria-hidden="true">*</span></label>
+            <select id="event-category" name="category" required aria-required="true">
+              <option value="">Select a category</option>
+              <option value="reading">Author Reading</option>
+              <option value="book-club">Book Club</option>
+              <option value="signing">Book Signing</option>
+              <option value="kids">Kids &amp; Family</option>
+              <option value="workshop">Workshop</option>
+            </select>
+            <span class="error-text" id="event-category-error" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="event-date">Date <span class="required" aria-hidden="true">*</span></label>
+            <input type="datelocal" id="event-date" name="date" required aria-required="true">
+            <span class="error-text" id="event-date-error" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="event-time">Time <span class="required" aria-hidden="true">*</span></label>
+            <input type="time" id="event-time" name="time" required aria-required="true">
+            <span class="error-text" id="event-time-error" role="alert"></span>
+          </div>
+
+          <div class="field field-full">
+            <label for="event-description">Description <span class="required" aria-hidden="true">*</span></label>
+            <textarea id="event-description" name="description" rows="3" required aria-required="true"></textarea>
+            <span class="error-text" id="event-description-error" role="alert"></span>
+          </div>
+
+        </div>
+
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-event-btn">
+            <span class="btn-label">Save event</span>
+          </button>
+          <button type="button" class="btn btn-secondary" id="cancel-add-event">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="events-section" aria-labelledby="events-heading">
+      <div class="events-section-header">
+        <h2 id="events-heading">Upcoming Events</h2>
+        <p class="results-count" id="results-count" aria-live="polite"></p>
+      </div>
+
+      <!-- Live region announcing state changes for screen reader users -->
+      <div id="events-status" class="visually-hidden" aria-live="polite"></div>
+
+      <div id="events-container">
+        <!-- Loading, error, empty, and card states are rendered here by script.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Independent Bookstore Events &mdash; internal staff tool</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
